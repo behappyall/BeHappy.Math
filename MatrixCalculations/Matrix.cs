@@ -27,6 +27,7 @@ namespace MatrixCalculations
         {
             get
             {
+                // try catch so slow. so i'm using if... 
                 if (i < 0 || i >= RowsCount)
                     throw new ArgumentException($"Parameter {nameof(i)} must be bigger 0 and less than {nameof(RowsCount)}={RowsCount}");
 

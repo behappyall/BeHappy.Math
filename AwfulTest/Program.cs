@@ -31,18 +31,18 @@ namespace AwfulTest
             Matrix parallelResult = a * b;
             stopwatch.Stop();
             Console.WriteLine(stopwatch.ElapsedMilliseconds);
-            MatrixOperationSettings.ProccessType = MatrixProccessType.NonParallel;
+            //MatrixOperationSettings.ProccessType = MatrixProccessType.NonParallel;
 
-            stopwatch.Restart();
-            var nonParallelResult = a * b;
-            stopwatch.Stop();
-            Console.WriteLine(stopwatch.ElapsedMilliseconds);
+            //stopwatch.Restart();
+            //var nonParallelResult = a * b;
+            //stopwatch.Stop();
+            //Console.WriteLine(stopwatch.ElapsedMilliseconds);
 
-            Console.WriteLine(parallelResult[554, 123]);
-            Console.WriteLine(nonParallelResult[554, 123]);
-            nonParallelResult[1, 2] = 3;
-            MatrixOperationSettings.ProccessType = MatrixProccessType.Parallel;
-            Console.WriteLine(nonParallelResult==parallelResult);
+            //Console.WriteLine(parallelResult[554, 123]);
+            //Console.WriteLine(nonParallelResult[554, 123]);
+            //nonParallelResult[1, 2] = 3;
+            //MatrixOperationSettings.ProccessType = MatrixProccessType.Parallel;
+            //Console.WriteLine(nonParallelResult==parallelResult);
         }
     }
 }
