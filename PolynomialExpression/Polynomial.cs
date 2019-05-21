@@ -12,11 +12,10 @@ namespace PolynomialExpression
         public Polynomial() => _terms = new List<Term>();
 
         public Polynomial(IEnumerable<Term> terms) => _terms = terms as List<Term> ?? new List<Term>();
+    
+        public IEnumerator<Term> GetEnumerator() => _terms.OrderByDescending(t => t.Power).GetEnumerator();
 
-        public IEnumerator<Term> GetEnumerator() => _terms.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => _terms.GetEnumerator();
-
+        IEnumerator IEnumerable.GetEnumerator() => _terms.OrderByDescending(t => t.Power).GetEnumerator();
 
         public double this[double value]
         {
@@ -30,7 +29,7 @@ namespace PolynomialExpression
 
         public void Append(Term term) => _terms.Add(term ?? throw new ArgumentException("term is null", nameof(term)));
 
-        public void Append(Polynomial polynomial) 
+        public void Append(Polynomial polynomial)
             => _terms.AddRange(polynomial ?? throw new ArgumentException("polynomial is null", nameof(polynomial)));
 
         public void Substract(double number) => Append(number * -1);
@@ -170,6 +169,17 @@ namespace PolynomialExpression
             return result;
         }
 
+
+        public static bool operator ==(Polynomial leftSide, Polynomial rightSide)
+        {
+            if (ReferenceEquals(leftSide, null))
+                return false;
+
+            return leftSide.Equals(rightSide);
+        }
+
+        public static bool operator !=(Polynomial leftSide, Polynomial rightSide) => !(leftSide == rightSide);
+
         public object Clone()
         {
             return new Polynomial(new List<Term>(_terms.Select(t => new Term(t.Power, t.Coefficient))));
@@ -189,7 +199,6 @@ namespace PolynomialExpression
 
         public override string ToString()
             => String.Join(' ', this.OrderByDescending(t => t.Power));
-
 
         public override bool Equals(object obj)
         {
@@ -219,8 +228,9 @@ namespace PolynomialExpression
             if (ReferenceEquals(this, polynomial))
                 return true;
 
-            return this.OrderBy(t => t.Power).SequenceEqual(polynomial.OrderBy(t => t.Power));
+            return this.SequenceEqual(polynomial);
             //return 
         }
+        
     }
 }
