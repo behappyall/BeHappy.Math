@@ -79,7 +79,7 @@ namespace MatrixCalculations.CalculateProviders
                 {
                     var column = rightMatrixData_Transpose[j]; // just for more speed
                     double sum = 0;
-                    
+
                     for (int k = 0; k < row.Length; k++)
                         sum += row[k] * column[k];
 
